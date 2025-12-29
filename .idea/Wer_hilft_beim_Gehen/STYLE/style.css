@@ -1,0 +1,541 @@
+/* CSS */
+@font-face {
+    font-family: 'Diatype Semi-Mono';
+    src: url('../ASSETS/FONTS/ABCDiatypeSemi-MonoVariableEdu-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Helveesti';
+    src: url('../ASSETS/FONTS/HelveestiVariableEdu-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Social';
+    src: url('../ASSETS/FONTS/SocialVariableEdu-Regular.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Social_Zitat';
+    src: url('../ASSETS/FONTS/SocialCondensedEdu-Bold.woff') format('woff');
+}
+
+
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+}
+
+/* Basis für die Seiten: volle Höhe, Spalten-Layout damit .content scrollt */
+.seiteVater, .seiteSohn {
+    position: relative;
+    transition: width 0.6s ease;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    height: 100vh; /* wichtige Zeile für unabhängiges Scrollen */
+    overflow: hidden; /* content hat eigenen overflow */
+    width: 50vw; /* zusammengeführter Standard */
+}
+
+/* Intro-Bild / Layer */
+.introPic {
+    position: relative; /* Context für absolute Positionierung */
+    display: block;     /* kein Flex mehr, damit Bild als Hintergrund-Layer liegt */
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    opacity: 0.35; /* vorhandene Einstellung beibehalten */
+    transition: opacity 0.5s;
+}
+
+.introPic img {
+    position: absolute;
+    inset: 0; /* top:0; right:0; bottom:0; left:0; */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+    margin: 0;
+    z-index: 0;
+}
+
+/* Intro-Text (standard versteckt) */
+.introTextFredi {
+    position: absolute;
+    bottom: 1rem;       /* am unteren Rand von .introPic starten */
+    left: 1rem;         /* Abstand vom linken Rand */
+    right: 1rem;        /* Abstand vom rechten Rand (zentriert / responsive) */
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 0 1rem;
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+/* IntroTextLeon rechts positionieren und Inhalte rechtsbündig */
+.introTextLeon {
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;         /* volle Breite wie bei .introTextFredi */
+    right: 1rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 1rem 0 1rem;
+    color: #fff;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    align-items: flex-end; /* Kinder am rechten Rand ausrichten */
+    text-align: right;     /* Text innerhalb rechtsbündig */
+}
+
+.introText{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    gap: 1.5rem;
+}
+
+.introHeading h1{
+    font-size: 4rem;
+    font-weight: 700;
+    font-family: 'Diatype Semi-Mono';
+    margin: 0 0 0.5rem 0;
+    word-spacing: -1rem;
+    letter-spacing: -0.1rem;
+}
+
+/* Button innerhalb Intro-Text darf klicken */
+.introTextFredi .startFredi {
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.introTextSubheading{
+    max-width: 30rem;
+}
+
+.introTextSubheading p{
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #ffffff;
+    font-family: 'Helveesti';
+    font-weight: 400;
+    line-height: 1.7rem;
+}
+
+.seiteVater.expanded .bilderGalerie{
+    flex-direction: row;
+}
+
+.introTextStartButton{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: scale(0.8); /* ersetzt nicht-standard 'scale' */
+}
+
+.introTextStartButton:hover{
+    cursor: pointer;
+}
+
+.arrow-svg{
+    margin: 0;
+    animation: arrow-bounce 1.6s ease-in-out infinite;
+}
+
+
+.startFredi{
+    font-family: 'Diatype Semi-Mono';
+    color: #fff;
+    font-weight: 200;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.startLeon{
+    font-family: 'Diatype Semi-Mono';
+    color: #fff;
+    font-weight: 200;
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.scrollButtonContainer{
+    margin: 0.5rem 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/* Spezifische Rechts-Ausrichtung für IntroTextLeon-Inhalte */
+.seiteSohn .introTextLeon .introHeading h1,
+.seiteSohn .introTextLeon .introTextSubheading p,
+.seiteSohn .introTextLeon .startFredi {
+    text-align: right;
+}
+
+/* Scroll-Button an den rechten Rand schieben, Pfeil und Text ebenfalls rechts */
+.seiteSohn .introTextLeon .scrollButtonContainer {
+    justify-content: center;
+}
+
+.seiteSohn .introTextLeon .introTextStartButton {
+    align-items: center; /* sorgt dafür, dass h1 und svg am rechten Rand stehen */
+}
+
+/* Sichtbarkeit nur, wenn über die Vater-/Sohn-Seite gehovt wird
+   oder die Touch-Fallback-Klasse auf dem Vater-Element gesetzt ist */
+.seiteVater:hover .introTextFredi,
+.seiteVater.hover-visible-vater .introTextFredi,
+.seiteSohn:hover .introTextLeon,
+.seiteSohn.hover-visible-sohn .introTextLeon {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Bei Hover über das Bild innerhalb einer Seite sichtbar */
+.introPic:hover .introTextFredi,
+.introPic:hover .introTextLeon {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* Seite-Intro-Opacity beim Hover (beide Seiten) */
+.seiteVater:hover .introPic,
+.seiteSohn:hover .introPic {
+    opacity: 1;
+    transition: opacity 0.5s;
+}
+
+.Inhalt{
+    padding: 0.8rem;
+    border-right: 1px solid #333;
+}
+
+.absatz1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;  /* für Block-Elemente (z.B. p, h1) */
+    color: white;
+    margin: 0 auto;        /* optional: zentriert das Element selbst */
+    font-size: 1.5rem;
+    letter-spacing: 0.07rem;
+    font-family: 'Social';
+    padding: 0 3rem 0 3rem;
+    max-width: 55rem;
+    line-height: 1.25;
+}
+
+.heading{
+    align-self: flex-start;
+    width: 100%;
+    text-align: left;
+    font-size: 2.8rem;
+    font-family: 'Helveesti';
+    margin: 2rem 0 0 0;
+}
+
+.heading p{
+    margin: 0;
+}
+
+.videoFullsize{
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* zentriert das Video horizontal */
+    margin: 0 auto;       /* zentriert den Container selbst */
+    width: 100%;
+    max-width: 60rem;
+}
+
+.YTVideo{
+    margin-top: 2rem;
+    width: 100%;
+    max-width: 56rem;
+    aspect-ratio: 16 / 9;
+}
+
+.videoDescription{
+    align-self: flex-start;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
+.bilderGalerie{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0 2rem 0;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.bilderGalerie img{
+    width: 25rem;
+    height: auto;
+}
+
+.bildFull{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem 0 2rem 0;
+    width: 100%;
+}
+
+.bildFull img {
+    width: 100%;
+    height: auto;
+}
+
+.textBild{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: white;
+    margin: 2rem 0 2rem 0;
+    font-size: 1.5rem;
+    letter-spacing: 0.07rem;
+    font-family: 'Social';
+    max-width: 55rem;
+    justify-content: space-between;
+    gap: 5rem;
+}
+
+.textBildText{
+    max-width: 50%;
+}
+
+.bildTextRechts{
+    max-width: 50%;
+}
+
+.bildTextRechts img{
+    width: 100%;
+    height: auto;
+}
+
+/* Farben */
+.seiteVater { background-color: #151515; }
+.seiteSohn { background-color: #151515; }
+
+/* Standard-Aufteilung */
+.seiteVater, .seiteSohn {
+    width: 50vw;
+}
+
+/* Zustände: collapsed / expanded */
+.seiteVater.collapsed, .seiteSohn.collapsed {
+    width: 4rem; /* Breite der "geschlossenen" Seite mit sichtbarem Tab */
+}
+
+.seiteVater.expanded, .seiteSohn.expanded {
+    width: calc(100vw - 4rem);
+}
+
+/* Tab / Reiter - standardmäßig ausgeblendet, nur sichtbar wenn die Seite collapsed ist */
+.tabSohn, .tabVater {
+    position: absolute;
+    top: 50%;
+    transform-origin: center;
+    width: 7.5rem;
+    height: 3rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: rgb(241,241,241);
+    border: none;
+    cursor: pointer;
+    font-weight: 400;
+    z-index: 3;
+    white-space: nowrap;
+    font-size: 1.2rem;
+}
+
+
+/* Position der Tabs */
+.seiteVater .tabVater { right: -2.75rem; border-radius: 0.25rem; transform: translateY(-50%) rotate(-90deg); }
+.seiteSohn .tabSohn  { left: -2.75rem;  border-radius: 0.25rem; transform: translateY(-50%) rotate(90deg); }
+
+
+/* Tab nur sichtbar wenn die Seite collapsed ist (also die andere Seite expanded) */
+.seiteVater.collapsed .tabVater,
+.seiteSohn.collapsed .tabSohn {
+    display: flex;
+}
+
+/* Inhalt Bereich: füllt verbleibende Höhe und ist scrollbar */
+.content {
+    flex: 1 1 auto;
+    overflow: auto; /* erzeugt eigenständigen Scroll für jede Seite */
+    width: 100%;
+    overflow-x: hidden;
+    scrollbar-width: none;
+}
+
+/* Beim collapsed Inhalt ausblenden */
+.seiteVater.collapsed .content,
+.seiteSohn.collapsed .content {
+    opacity: 0.5;
+    transition: opacity 0.3s;
+    cursor: pointer;
+}
+
+.seiteVater.collapsed .Inhalt,
+.seiteSohn.collapsed .Inhalt {
+    padding: 0;
+    margin: 0;
+}
+
+/* Beim expanded Inhalt sichtbar */
+.seiteVater.expanded .content,
+.seiteSohn.expanded .content {
+    opacity: 1;
+    transition: opacity 0.4s 0.15s;
+}
+
+/* Optional: Hover-Effekt auf Tab */
+.tabSohn:hover, .tabVater:hover {
+    background: rgba(202, 202, 202, 0.18);
+    color: rgb(241,241,241);
+}
+
+.seiteSohn .introTextLeon .introTextSubheading,
+.seiteSohn .introTextLeon .introTextSubheading p,
+.seiteSohn .introTextLeon .introHeading,
+.seiteSohn .introTextLeon .introHeading h1,
+.seiteSohn .introTextLeon p {
+    text-align: right;
+    align-self: flex-end; /* Block-Elemente im flex-column-Container nach rechts schieben */
+}
+
+.zitatSection{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 2rem 0 2rem 0;
+    width: 100%;
+}
+
+.zitat{
+    font-family: 'Social_Zitat';
+    font-size: 2.8rem;
+    color: white;
+    text-align: left;
+    max-width: 40rem;
+    line-height: 1.2;
+}
+
+@keyframes arrow-bounce{
+    0%   { transform: translateY(0); }
+    50%  { transform: translateY(6px); }
+    100% { transform: translateY(0); }
+}
+
+@media (max-width: 499px){
+    .introTextSubheading{
+        margin-top: 0.5rem;
+        max-width: 10rem;
+    }
+
+    .introTextSubheading p{
+        font-size: 0.5rem;
+    }
+
+    .wrapper{
+        flex-direction: row;
+    }
+}
+
+/* Für Klaus */
+
+.seiteVater.collapsed:hover .introPic,
+.seiteSohn.collapsed:hover .introPic {
+    /* wieder auf Standard-Opacity zurücksetzen */
+    opacity: 0.35;
+    transition: opacity 0.5s;
+}
+
+/* Intro-Text bei collapsed nicht anzeigen oder klickbar machen */
+.seiteVater.collapsed .introPic:hover .introTextFredi,
+.seiteSohn.collapsed .introPic:hover .introTextLeon,
+.seiteVater.collapsed:hover .introTextFredi,
+.seiteSohn.collapsed:hover .introTextLeon,
+.seiteVater.collapsed.hover-visible-vater .introTextFredi,
+.seiteSohn.collapsed.hover-visible-sohn .introTextLeon {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.trigger-overlay{
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0,0,0,0.65);
+    z-index: 9999;
+}
+.trigger-modal{
+    background: #fff;
+    color: #111;
+    max-width: 34rem;
+    width: calc(100% - 2rem);
+    padding: 1.25rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    font-family: inherit;
+}
+.trigger-modal h2{
+    margin: 0 0 .5rem 0;
+    font-size: 1.25rem;
+}
+.trigger-modal p{
+    margin: 0;
+    line-height: 1.4;
+}
+.trigger-actions{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+.trigger-checkbox input{ margin-right: .5rem; }
+#triggerClose{
+    background: #151515;
+    color: #fff;
+    border: none;
+    padding: .5rem .9rem;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.trigger-overlay.hidden {
+    display: none !important;
+    pointer-events: none;
+    visibility: hidden;
+}
