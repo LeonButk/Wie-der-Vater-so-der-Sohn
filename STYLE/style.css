@@ -228,8 +228,8 @@ html, body {
 
 .Inhalt{
     padding: 0.8rem;
-    border-right: 1px solid #333;
 }
+
 
 .absatz1 {
     display: flex;
@@ -310,6 +310,13 @@ html, body {
     height: auto;
 }
 
+.bildDescription{
+    align-self: flex-start;
+    text-align: left;
+    font-size: 1.2rem;
+    font-weight: 200;
+}
+
 .textBild{
     display: flex;
     flex-direction: row;
@@ -337,9 +344,21 @@ html, body {
     height: auto;
 }
 
+.zitatSmall{
+    margin: 2rem 0 2rem 0;
+    font-weight: 900;
+    font-size: 1.9rem;
+}
+
 /* Farben */
-.seiteVater { background-color: #151515; }
-.seiteSohn { background-color: #151515; }
+.seiteVater {
+    background-color: #151515;
+    border-right: 1px solid #333;
+}
+.seiteSohn {
+    background-color: #151515;
+    border-left: 1px solid #333;
+}
 
 /* Standard-Aufteilung */
 .seiteVater, .seiteSohn {
@@ -376,8 +395,17 @@ html, body {
 
 
 /* Position der Tabs */
-.seiteVater .tabVater { right: -2.75rem; border-radius: 0.25rem; transform: translateY(-50%) rotate(-90deg); }
-.seiteSohn .tabSohn  { left: -2.75rem;  border-radius: 0.25rem; transform: translateY(-50%) rotate(90deg); }
+.seiteVater .tabVater {
+    right: -2.75rem;
+    border-radius: 0.25rem;
+    transform: translateY(-50%) rotate(-90deg);
+}
+
+.seiteSohn .tabSohn  {
+    left: -2.75rem;
+    border-radius: 0.25rem;
+    transform: translateY(-50%) rotate(90deg);
+}
 
 
 /* Tab nur sichtbar wenn die Seite collapsed ist (also die andere Seite expanded) */
@@ -465,8 +493,89 @@ html, body {
         font-size: 0.5rem;
     }
 
+    /* Stapeln statt nebeneinander */
     .wrapper{
-        flex-direction: row;
+        flex-direction: column;
+        height: 100vh;
+    }
+
+    /* Beide Seiten nehmen volle Breite, halbe Höhe als Ausgangszustand */
+    .seiteVater, .seiteSohn {
+        width: 100vw;
+        height: 50vh;
+        transition: height 0.45s ease;
+        overflow: hidden;
+    }
+
+    /* collapsed = kleine Leiste (Tab sichtbar) */
+    .seiteVater.collapsed, .seiteSohn.collapsed {
+        height: 4rem;
+        width: 100vw;
+    }
+
+    /* expanded = füllt verbliebene Höhe (Platz für die andere collapsed Leiste) */
+    .seiteVater.expanded, .seiteSohn.expanded {
+        height: calc(100vh - 4rem);
+        width: 100vw;
+    }
+
+    /* Tabs unten zentriert, keine Rotation mehr */
+    .tabSohn, .tabVater {
+        top: auto;
+        bottom: -2.25rem;
+        left: 50%;
+        transform: translateX(-50%);
+        transform-origin: center;
+        display: none; /* werden nur bei collapsed sichtbar gemacht weiter unten */
+        width: 9rem;
+        height: 3rem;
+        border-radius: 0.25rem;
+    }
+
+    /* Tab sichtbar, wenn die Seite collapsed ist */
+    .seiteVater.collapsed .tabVater,
+    .seiteSohn.collapsed .tabSohn {
+        display: flex;
+    }
+
+    /* Inhalt ausblenden, wenn collapsed */
+    .seiteVater.collapsed .content,
+    .seiteSohn.collapsed .content {
+        opacity: 0;
+        pointer-events: none;
+        display: none;
+    }
+
+    /* Inhalt sichtbar und scrollbar bei expanded */
+    .seiteVater.expanded .content,
+    .seiteSohn.expanded .content {
+        opacity: 1;
+        pointer-events: auto;
+        display: block;
+        overflow: auto;
+    }
+
+    /* Intro-Bilder anpassen, damit sie nicht zu groß werden */
+    .introPic {
+        height: 50vh;
+    }
+
+    /* kleine optische Anpassungen damit das Layout nicht bricht */
+    .absatz1 {
+        padding: 0 1rem;
+        font-size: 1.1rem;
+    }
+
+    .seiteVater .tabVater {
+        right: 0;
+        border-radius: 0.25rem;
+        transform: translateX(-50%) translateY(-60%) rotate(0deg);
+    }
+
+    .seiteSohn .tabSohn  {
+        left: 0;
+        border-radius: 0.25rem;
+        transform: translateX(120%) translateY(-120%) rotate(0deg);
     }
 }
 
@@ -499,6 +608,7 @@ html, body {
     background: rgba(0,0,0,0.65);
     z-index: 9999;
 }
+
 .trigger-modal{
     background: #fff;
     color: #111;
@@ -509,14 +619,17 @@ html, body {
     box-shadow: 0 8px 24px rgba(0,0,0,0.5);
     font-family: inherit;
 }
+
 .trigger-modal h2{
     margin: 0 0 .5rem 0;
     font-size: 1.25rem;
 }
+
 .trigger-modal p{
     margin: 0;
     line-height: 1.4;
 }
+
 .trigger-actions{
     display: flex;
     align-items: center;
@@ -524,7 +637,10 @@ html, body {
     gap: 1rem;
     margin-top: 1rem;
 }
-.trigger-checkbox input{ margin-right: .5rem; }
+.trigger-checkbox input{
+    margin-right: .5rem;
+}
+
 #triggerClose{
     background: #151515;
     color: #fff;
