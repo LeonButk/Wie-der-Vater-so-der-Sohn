@@ -1,4 +1,3 @@
-/* CSS */
 @font-face {
     font-family: 'Diatype Semi-Mono';
     src: url('../ASSETS/FONTS/ABCDiatypeSemi-MonoVariableEdu-Regular.woff') format('woff');
@@ -18,8 +17,6 @@
     font-family: 'Social_Zitat';
     src: url('../ASSETS/FONTS/SocialCondensedEdu-Bold.woff') format('woff');
 }
-
-
 
 html, body {
     margin: 0;
@@ -44,6 +41,14 @@ html, body {
     height: 100vh; /* wichtige Zeile für unabhängiges Scrollen */
     overflow: hidden; /* content hat eigenen overflow */
     width: 50vw; /* zusammengeführter Standard */
+}
+
+.content {
+    flex: 1 1 auto;
+    overflow: auto; /* erzeugt eigenständigen Scroll für jede Seite */
+    width: 100%;
+    overflow-x: hidden;
+    scrollbar-width: none;
 }
 
 /* Intro-Bild / Layer */
@@ -137,7 +142,6 @@ html, body {
     font-weight: 400;
     color: #ffffff;
     font-family: 'Helveesti';
-    font-weight: 400;
     line-height: 1.7rem;
 }
 
@@ -160,7 +164,6 @@ html, body {
     margin: 0;
     animation: arrow-bounce 1.6s ease-in-out infinite;
 }
-
 
 .startFredi{
     font-family: 'Diatype Semi-Mono';
@@ -189,7 +192,7 @@ html, body {
 /* Spezifische Rechts-Ausrichtung für IntroTextLeon-Inhalte */
 .seiteSohn .introTextLeon .introHeading h1,
 .seiteSohn .introTextLeon .introTextSubheading p,
-.seiteSohn .introTextLeon .startFredi {
+.seiteSohn .introTextLeon .startLeon {
     text-align: right;
 }
 
@@ -206,8 +209,7 @@ html, body {
    oder die Touch-Fallback-Klasse auf dem Vater-Element gesetzt ist */
 .seiteVater:hover .introTextFredi,
 .seiteVater.hover-visible-vater .introTextFredi,
-.seiteSohn:hover .introTextLeon,
-.seiteSohn.hover-visible-sohn .introTextLeon {
+.seiteSohn:hover .introTextLeon{
     opacity: 1;
     pointer-events: auto;
 }
@@ -229,7 +231,6 @@ html, body {
 .Inhalt{
     padding: 0.8rem;
 }
-
 
 .absatz1 {
     display: flex;
@@ -267,7 +268,7 @@ html, body {
     max-width: 60rem;
 }
 
-.YTVideo{
+.videoFrame{
     margin-top: 2rem;
     width: 100%;
     max-width: 56rem;
@@ -412,15 +413,6 @@ html, body {
 .seiteVater.collapsed .tabVater,
 .seiteSohn.collapsed .tabSohn {
     display: flex;
-}
-
-/* Inhalt Bereich: füllt verbleibende Höhe und ist scrollbar */
-.content {
-    flex: 1 1 auto;
-    overflow: auto; /* erzeugt eigenständigen Scroll für jede Seite */
-    width: 100%;
-    overflow-x: hidden;
-    scrollbar-width: none;
 }
 
 /* Beim collapsed Inhalt ausblenden */
@@ -597,61 +589,4 @@ html, body {
 .seiteSohn.collapsed.hover-visible-sohn .introTextLeon {
     opacity: 0;
     pointer-events: none;
-}
-
-.trigger-overlay{
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(0,0,0,0.65);
-    z-index: 9999;
-}
-
-.trigger-modal{
-    background: #fff;
-    color: #111;
-    max-width: 34rem;
-    width: calc(100% - 2rem);
-    padding: 1.25rem;
-    border-radius: 10px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
-    font-family: inherit;
-}
-
-.trigger-modal h2{
-    margin: 0 0 .5rem 0;
-    font-size: 1.25rem;
-}
-
-.trigger-modal p{
-    margin: 0;
-    line-height: 1.4;
-}
-
-.trigger-actions{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1rem;
-    margin-top: 1rem;
-}
-.trigger-checkbox input{
-    margin-right: .5rem;
-}
-
-#triggerClose{
-    background: #151515;
-    color: #fff;
-    border: none;
-    padding: .5rem .9rem;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-.trigger-overlay.hidden {
-    display: none !important;
-    pointer-events: none;
-    visibility: hidden;
 }

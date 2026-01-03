@@ -1,4 +1,3 @@
-/* Datei: JS/script.js */
 document.addEventListener('DOMContentLoaded', () => {
     const vater = document.getElementById('vater');
     const sohn = document.getElementById('sohn');
@@ -36,7 +35,22 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Touch-Fallback Vater (introPicSohn entfernt, wurde nicht verwendet)
+    const starLeon = document.getElementById('startLeon');
+    if (startLeon) {
+        startLeon.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const side = e.target.closest('#sohn') ? 'sohn' : (e.target.closest('#vater') ? 'vater' : null);
+            if (side) expand(side);
+            const target = document.getElementById('scrollLeon');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                window.location.hash = 'scrollLeon';
+            }
+        });
+    }
+
+    // Verschwinden des Hover-Effekts auf Touch-Geräten
     if ('ontouchstart' in window && introPicVater && vater) {
         introPicVater.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -117,38 +131,4 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-(function(){
-    const overlay = document.getElementById('triggerOverlay');
-    const btnClose = document.getElementById('triggerClose');
 
-    if (!overlay || !btnClose) return;
-
-    // Popup sichtbar und Fokus setzen; Hintergrundscroll sperren
-    overlay.classList.remove('hidden');
-    const modal = overlay.querySelector('.trigger-modal');
-    if (modal) modal.focus();
-    document.documentElement.style.overflow = 'hidden';
-    document.body.style.overflow = 'hidden';
-
-    function closeTrigger(){
-        overlay.classList.add('hidden');
-        document.documentElement.style.overflow = '';
-        document.body.style.overflow = '';
-    }
-
-    // Schließen bei Button-Klick
-    btnClose.addEventListener('click', (e) => {
-        e.stopPropagation();
-        closeTrigger();
-    });
-
-    // Klick außerhalb schließt
-    overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) closeTrigger();
-    });
-
-    // Escape schließt
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !overlay.classList.contains('hidden')) closeTrigger();
-    });
-})();
