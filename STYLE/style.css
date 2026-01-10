@@ -1,3 +1,5 @@
+/* Smartphone-Ansicht auf 499px gesetzt */
+
 @font-face {
     font-family: 'Diatype Semi-Mono';
     src: url('../ASSETS/FONTS/ABCDiatypeSemi-MonoVariableEdu-Regular.woff') format('woff');
@@ -31,40 +33,36 @@ html, body {
     position: relative;
 }
 
-/* Basis für die Seiten: volle Höhe, Spalten-Layout damit .content scrollt */
 .seiteVater, .seiteSohn {
     position: relative;
     transition: width 0.6s ease;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
-    height: 100vh; /* wichtige Zeile für unabhängiges Scrollen */
-    overflow: hidden; /* content hat eigenen overflow */
-    width: 50vw; /* zusammengeführter Standard */
+    overflow: hidden;
+    width: 50vw;
 }
 
 .content {
     flex: 1 1 auto;
-    overflow: auto; /* erzeugt eigenständigen Scroll für jede Seite */
+    overflow: auto;
     width: 100%;
     overflow-x: hidden;
     scrollbar-width: none;
 }
 
-/* Intro-Bild / Layer */
 .introPic {
-    position: relative; /* Context für absolute Positionierung */
-    display: block;     /* kein Flex mehr, damit Bild als Hintergrund-Layer liegt */
+    position: relative;
+    display: block;
     width: 100%;
     height: 100vh;
     overflow: hidden;
-    opacity: 0.35; /* vorhandene Einstellung beibehalten */
+    opacity: 0.35;
     transition: opacity 0.5s;
 }
 
 .introPic img {
     position: absolute;
-    inset: 0; /* top:0; right:0; bottom:0; left:0; */
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -74,12 +72,11 @@ html, body {
     z-index: 0;
 }
 
-/* Intro-Text (standard versteckt) */
 .introTextFredi {
     position: absolute;
-    bottom: 1rem;       /* am unteren Rand von .introPic starten */
-    left: 1rem;         /* Abstand vom linken Rand */
-    right: 1rem;        /* Abstand vom rechten Rand (zentriert / responsive) */
+    bottom: 1rem;
+    left: 1rem;
+    right: 1rem;
     z-index: 1;
     display: flex;
     flex-direction: column;
@@ -90,11 +87,10 @@ html, body {
     transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-/* IntroTextLeon rechts positionieren und Inhalte rechtsbündig */
 .introTextLeon {
     position: absolute;
     bottom: 1rem;
-    left: 1rem;         /* volle Breite wie bei .introTextFredi */
+    left: 1rem;
     right: 1rem;
     z-index: 1;
     display: flex;
@@ -104,8 +100,8 @@ html, body {
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.25s ease, transform 0.25s ease;
-    align-items: flex-end; /* Kinder am rechten Rand ausrichten */
-    text-align: right;     /* Text innerhalb rechtsbündig */
+    align-items: flex-end;
+    text-align: right;
 }
 
 .introText{
@@ -125,7 +121,6 @@ html, body {
     letter-spacing: -0.1rem;
 }
 
-/* Button innerhalb Intro-Text darf klicken */
 .introTextFredi .startFredi {
     pointer-events: auto;
     cursor: pointer;
@@ -153,7 +148,7 @@ html, body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    transform: scale(0.8); /* ersetzt nicht-standard 'scale' */
+    transform: scale(0.8);
 }
 
 .introTextStartButton:hover{
@@ -189,39 +184,32 @@ html, body {
     width: 100%;
 }
 
-/* Spezifische Rechts-Ausrichtung für IntroTextLeon-Inhalte */
 .seiteSohn .introTextLeon .introHeading h1,
 .seiteSohn .introTextLeon .introTextSubheading p,
 .seiteSohn .introTextLeon .startLeon {
     text-align: right;
 }
 
-/* Scroll-Button an den rechten Rand schieben, Pfeil und Text ebenfalls rechts */
 .seiteSohn .introTextLeon .scrollButtonContainer {
     justify-content: center;
 }
 
 .seiteSohn .introTextLeon .introTextStartButton {
-    align-items: center; /* sorgt dafür, dass h1 und svg am rechten Rand stehen */
+    align-items: center;
 }
 
-/* Sichtbarkeit nur, wenn über die Vater-/Sohn-Seite gehovt wird
-   oder die Touch-Fallback-Klasse auf dem Vater-Element gesetzt ist */
 .seiteVater:hover .introTextFredi,
-.seiteVater.hover-visible-vater .introTextFredi,
 .seiteSohn:hover .introTextLeon{
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Bei Hover über das Bild innerhalb einer Seite sichtbar */
 .introPic:hover .introTextFredi,
 .introPic:hover .introTextLeon {
     opacity: 1;
     pointer-events: auto;
 }
 
-/* Seite-Intro-Opacity beim Hover (beide Seiten) */
 .seiteVater:hover .introPic,
 .seiteSohn:hover .introPic {
     opacity: 1;
@@ -235,9 +223,9 @@ html, body {
 .absatz1 {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;  /* für Block-Elemente (z.B. p, h1) */
+    align-items: flex-start;
     color: white;
-    margin: 0 auto;        /* optional: zentriert das Element selbst */
+    margin: 0 auto;
     font-size: 1.5rem;
     letter-spacing: 0.07rem;
     font-family: 'Social';
@@ -262,8 +250,8 @@ html, body {
 .videoFullsize{
     display: flex;
     flex-direction: column;
-    align-items: center;  /* zentriert das Video horizontal */
-    margin: 0 auto;       /* zentriert den Container selbst */
+    align-items: center;
+    margin: 0 auto;
     width: 100%;
     max-width: 60rem;
 }
@@ -351,7 +339,6 @@ html, body {
     font-size: 1.9rem;
 }
 
-/* Farben */
 .seiteVater {
     background-color: #151515;
     border-right: 1px solid #333;
@@ -361,21 +348,18 @@ html, body {
     border-left: 1px solid #333;
 }
 
-/* Standard-Aufteilung */
 .seiteVater, .seiteSohn {
     width: 50vw;
 }
 
-/* Zustände: collapsed / expanded */
 .seiteVater.collapsed, .seiteSohn.collapsed {
-    width: 4rem; /* Breite der "geschlossenen" Seite mit sichtbarem Tab */
+    width: 4rem;
 }
 
 .seiteVater.expanded, .seiteSohn.expanded {
     width: calc(100vw - 4rem);
 }
 
-/* Tab / Reiter - standardmäßig ausgeblendet, nur sichtbar wenn die Seite collapsed ist */
 .tabSohn, .tabVater {
     position: absolute;
     top: 50%;
@@ -394,8 +378,6 @@ html, body {
     font-size: 1.2rem;
 }
 
-
-/* Position der Tabs */
 .seiteVater .tabVater {
     right: -2.75rem;
     border-radius: 0.25rem;
@@ -408,14 +390,11 @@ html, body {
     transform: translateY(-50%) rotate(90deg);
 }
 
-
-/* Tab nur sichtbar wenn die Seite collapsed ist (also die andere Seite expanded) */
 .seiteVater.collapsed .tabVater,
 .seiteSohn.collapsed .tabSohn {
     display: flex;
 }
 
-/* Beim collapsed Inhalt ausblenden */
 .seiteVater.collapsed .content,
 .seiteSohn.collapsed .content {
     opacity: 0.5;
@@ -429,26 +408,21 @@ html, body {
     margin: 0;
 }
 
-/* Beim expanded Inhalt sichtbar */
 .seiteVater.expanded .content,
 .seiteSohn.expanded .content {
     opacity: 1;
     transition: opacity 0.4s 0.15s;
 }
 
-/* Optional: Hover-Effekt auf Tab */
 .tabSohn:hover, .tabVater:hover {
     background: rgba(202, 202, 202, 0.18);
     color: rgb(241,241,241);
 }
 
 .seiteSohn .introTextLeon .introTextSubheading,
-.seiteSohn .introTextLeon .introTextSubheading p,
-.seiteSohn .introTextLeon .introHeading,
-.seiteSohn .introTextLeon .introHeading h1,
-.seiteSohn .introTextLeon p {
+.seiteSohn .introTextLeon .introTextSubheading p{
     text-align: right;
-    align-self: flex-end; /* Block-Elemente im flex-column-Container nach rechts schieben */
+    align-self: flex-end;
 }
 
 .zitatSection{
@@ -476,22 +450,94 @@ html, body {
 }
 
 @media (max-width: 499px){
+
+    .introHeading h1{
+        font-size: 2.3rem;
+        word-spacing: -0.5rem;
+        letter-spacing: 0;
+        margin: 0;
+    }
+
     .introTextSubheading{
-        margin-top: 0.5rem;
-        max-width: 10rem;
+        margin-top: 0.2rem;
+        max-width: 18rem;
     }
 
     .introTextSubheading p{
-        font-size: 0.5rem;
+        font-size: 1rem;
+        line-height: 1.2rem;
     }
 
-    /* Stapeln statt nebeneinander */
+    .scrollButtonContainer{
+        margin: 0;
+    }
+
+    .introTextStartButton{
+        transform: scale(0.6);
+        padding: 0;
+
+    }
+
+    .introTextStartButton .arrow-svg{
+        width: 28px;
+        height: 28px;
+    }
+
+    .heading p{
+        line-height: 3rem;
+    }
+
+    .text p{
+        line-height: 1.55rem;
+        font-size: 1.2rem;
+    }
+
+    .videoDescription{
+        font-size: 1rem;
+        font-weight: 200;
+    }
+
+    .bildDescription{
+        font-size: 1rem;
+        font-weight: 200;
+    }
+
+    .zitatSection{
+        margin: 0.5rem 0 0.5rem 0;
+    }
+
+    .zitat{
+        font-size: 2.25rem;
+    }
+
+    .textBild{
+        flex-direction: column;
+        gap: 2rem;
+        width: 100%;
+        max-width: 100%;
+        margin: 2rem 0 1rem 0;
+    }
+
+    .textBildText{
+        max-width: 100%;
+        line-height: 1.55rem;
+        font-size: 1.2rem;
+    }
+
+    .zitatSmall{
+        font-size: 2.25rem;
+        line-height: 2.8rem;
+    }
+
+    .bildTextRechts{
+        max-width: 100%;
+    }
+
     .wrapper{
         flex-direction: column;
         height: 100vh;
     }
 
-    /* Beide Seiten nehmen volle Breite, halbe Höhe als Ausgangszustand */
     .seiteVater, .seiteSohn {
         width: 100vw;
         height: 50vh;
@@ -499,64 +545,47 @@ html, body {
         overflow: hidden;
     }
 
-    /* collapsed = kleine Leiste (Tab sichtbar) */
+    .seiteVater{
+        border-right: none;
+        border-bottom: 1px solid #333;
+    }
+
+    .seiteSohn{
+        border-left: none;
+        border-top: 1px solid #333;
+    }
+
     .seiteVater.collapsed, .seiteSohn.collapsed {
         height: 4rem;
         width: 100vw;
     }
 
-    /* expanded = füllt verbliebene Höhe (Platz für die andere collapsed Leiste) */
     .seiteVater.expanded, .seiteSohn.expanded {
         height: calc(100vh - 4rem);
         width: 100vw;
     }
 
-    /* Tabs unten zentriert, keine Rotation mehr */
     .tabSohn, .tabVater {
         top: auto;
         bottom: -2.25rem;
         left: 50%;
         transform: translateX(-50%);
         transform-origin: center;
-        display: none; /* werden nur bei collapsed sichtbar gemacht weiter unten */
+        display: none;
         width: 9rem;
         height: 3rem;
         border-radius: 0.25rem;
     }
 
-    /* Tab sichtbar, wenn die Seite collapsed ist */
-    .seiteVater.collapsed .tabVater,
-    .seiteSohn.collapsed .tabSohn {
-        display: flex;
-    }
-
-    /* Inhalt ausblenden, wenn collapsed */
-    .seiteVater.collapsed .content,
-    .seiteSohn.collapsed .content {
-        opacity: 0;
-        pointer-events: none;
-        display: none;
-    }
-
-    /* Inhalt sichtbar und scrollbar bei expanded */
-    .seiteVater.expanded .content,
-    .seiteSohn.expanded .content {
-        opacity: 1;
-        pointer-events: auto;
-        display: block;
-        overflow: auto;
-    }
-
-    /* Intro-Bilder anpassen, damit sie nicht zu groß werden */
     .introPic {
         height: 50vh;
     }
 
-    /* kleine optische Anpassungen damit das Layout nicht bricht */
     .absatz1 {
         padding: 0 1rem;
         font-size: 1.1rem;
     }
+
 
     .seiteVater .tabVater {
         right: 0;
@@ -571,22 +600,16 @@ html, body {
     }
 }
 
-/* Für Klaus */
-
 .seiteVater.collapsed:hover .introPic,
 .seiteSohn.collapsed:hover .introPic {
-    /* wieder auf Standard-Opacity zurücksetzen */
     opacity: 0.35;
     transition: opacity 0.5s;
 }
 
-/* Intro-Text bei collapsed nicht anzeigen oder klickbar machen */
 .seiteVater.collapsed .introPic:hover .introTextFredi,
 .seiteSohn.collapsed .introPic:hover .introTextLeon,
 .seiteVater.collapsed:hover .introTextFredi,
-.seiteSohn.collapsed:hover .introTextLeon,
-.seiteVater.collapsed.hover-visible-vater .introTextFredi,
-.seiteSohn.collapsed.hover-visible-sohn .introTextLeon {
+.seiteSohn.collapsed:hover .introTextLeon{
     opacity: 0;
     pointer-events: none;
 }

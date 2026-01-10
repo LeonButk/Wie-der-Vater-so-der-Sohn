@@ -1,9 +1,12 @@
+// Der JavaScript-Code wurde mit Hilfe von KI erstellt und optimiert, um eine saubere und effiziente Lösung für die Zwei-Seiten-Interaktion zu bieten.
+
 document.addEventListener('DOMContentLoaded', () => {
     const vater = document.getElementById('vater');
     const sohn = document.getElementById('sohn');
     const vaterTab = document.getElementById('vaterTab');
     const sohnTab = document.getElementById('sohnTab');
     const introPicVater = document.getElementById('introPicVater');
+
     const interactiveSelectors = [
         '.YTVideo'
     ];
@@ -126,9 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') reset();
-    });
 });
 
 
